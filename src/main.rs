@@ -6,7 +6,7 @@ extern crate rpassword;
 use clipboard::{ClipboardContext,ClipboardProvider};
 use getopts::{Matches,Options};
 use keepass::{Database,Node,OpenDBError};
-use rpassword::prompt_password_stdout;
+use rpassword::prompt_password_stderr;
 use std::env;
 use std::fs::File;
 use std::process::exit;
@@ -24,7 +24,7 @@ fn main() {
 
     match matches.opt_str("p") {
         Some(p) => { password = p },
-        None => { password = prompt_password_stdout("Password: ").unwrap() },
+        None => { password = prompt_password_stderr("Password: ").unwrap() },
     }
 
     let db = File::open(std::path::Path::new(&db_file))
